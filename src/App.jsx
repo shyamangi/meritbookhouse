@@ -18,6 +18,7 @@ import {
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
 
+
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
@@ -282,8 +283,7 @@ const BOOKS_DATA = [
  { id: 262, title: "Medical Dictionary E-E-H", title_hi: " मेडिकल डिक्शनरी  (इंग्लिश - इंग्लिश - हिंदी)", exam: "CENTRAL ALL EXAM", author: "Dr.H.L. Verma, Sr.S.K. Gupta", publisher: "Amar", price: 297.00, img: "1uivRi5j-T8-ur_POyh-Ue5fHcnSEXveb" },
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
- { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },  
-];
+ { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },];
 
 const ITEMS_PER_PAGE = 12;
 const CONTACT_PHONE = "919119113869"; 
@@ -301,47 +301,45 @@ const getDriveUrl = (id, width = 600) => `https://lh3.googleusercontent.com/u/0/
 const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
   <div className="group flex flex-col will-change-transform">
     <div 
-      className="relative aspect-[3/4] mb-4 overflow-hidden rounded-[1.5rem] bg-[#F5F5F7] cursor-pointer transition-all duration-300 hover:shadow-lg transform-gpu"
+      className="relative aspect-[3/4] mb-3 overflow-hidden rounded-[1.5rem] bg-[#F5F5F7] cursor-pointer transition-all duration-300 transform-gpu"
       onClick={() => onSelect(book)}
     >
-      <div className="w-full h-full p-3 md:p-4">
+      <div className="w-full h-full p-2.5 md:p-4">
         <img 
           src={getDriveUrl(book.img, 500)} 
           alt={book.title} 
-          className="w-full h-full object-cover rounded-[1.25rem] transition-transform duration-500 group-hover:scale-105 shadow-sm transform-gpu" 
+          className="w-full h-full object-cover rounded-[1.1rem] transition-transform duration-500 group-hover:scale-105 shadow-sm transform-gpu" 
           referrerPolicy="no-referrer"
           loading="lazy"
         />
       </div>
     </div>
     <div className="flex flex-col flex-1 px-1">
-      <div className="h-[14px] mb-1 overflow-hidden">
-        <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-tighter">
+      <div className="h-[14px] mb-1 overflow-hidden flex items-center">
+        <span className="text-[9px] md:text-[10px] font-extrabold text-blue-600 uppercase tracking-tighter">
           {book.exam}
         </span>
       </div>
-      <div className="h-[42px] md:h-[45px] overflow-hidden mb-1">
-        <h3 className="font-bold text-[14px] md:text-[15px] leading-snug cursor-pointer hover:text-blue-600 transition-colors line-clamp-2" onClick={() => onSelect(book)}>
+      <div className="h-[40px] md:h-[45px] overflow-hidden mb-1">
+        <h3 className="font-bold text-[13px] md:text-[15px] leading-[1.2] cursor-pointer hover:text-blue-600 transition-colors line-clamp-2" onClick={() => onSelect(book)}>
           {book.title}
         </h3>
       </div>
-      <div className="flex flex-col gap-0.5 mb-3 h-[32px] overflow-hidden">
-        <p className="text-[11px] font-medium text-gray-400 truncate italic">{book.author}</p>
-        <div className="flex items-center gap-2">
-          <p className="text-[10px] font-bold text-gray-500 truncate uppercase tracking-tight">{book.publisher}</p>
-          <span className="text-[9px] font-bold text-gray-300 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-100 uppercase tracking-tight shrink-0">ID: {book.id}</span>
+      <div className="flex flex-col gap-0.5 mb-2 h-[34px] overflow-hidden">
+        <p className="text-[10px] md:text-[11px] font-medium text-gray-400 truncate italic">{book.author}</p>
+        <div className="flex items-center gap-1.5 overflow-hidden">
+          <p className="text-[9px] md:text-[10px] font-bold text-gray-500 truncate uppercase tracking-tight shrink">{book.publisher}</p>
+          <span className="text-[8px] md:text-[9px] font-bold text-gray-300 bg-gray-50 px-1 py-0.5 rounded border border-gray-100 uppercase tracking-tight shrink-0">ID: {book.id}</span>
         </div>
       </div>
-      <div className="mt-auto flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-[17px] font-extrabold tracking-tight leading-none">₹{book.price}</span>
-        </div>
+      <div className="mt-auto flex items-center justify-between pb-1">
+        <span className="text-[16px] md:text-[18px] font-extrabold tracking-tight leading-none">₹{book.price}</span>
         <button 
           onClick={(e) => { e.stopPropagation(); onAdd(book); }}
-          className={`w-9 h-9 flex items-center justify-center rounded-full transition-all active:scale-90 transform-gpu ${
+          className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full transition-all active:scale-90 transform-gpu ${
             isInCart 
             ? "bg-blue-600 text-white shadow-md" 
-            : "bg-[#F5F5F7] hover:bg-black hover:text-white"
+            : "bg-[#F5F5F7] md:hover:bg-black md:hover:text-white"
           }`}
         >
           {isInCart ? <Check className="w-4 h-4" /> : <Plus className="w-3.5 h-3.5" />}
@@ -371,7 +369,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Rotating placeholder effect
     const interval = setInterval(() => {
@@ -390,7 +388,7 @@ export default function App() {
     
     return BOOKS_DATA.filter(book => 
       book.title.toLowerCase().includes(query) || 
-      book.title_hi.includes(query) ||
+      (book.title_hi && book.title_hi.includes(query)) ||
       book.author.toLowerCase().includes(query) || 
       book.exam.toLowerCase().includes(query) ||
       book.publisher.toLowerCase().includes(query) ||
@@ -438,12 +436,12 @@ export default function App() {
               <input 
                 type="text"
                 placeholder={searchSuggestions[placeholderIndex]}
-                className="w-full pl-11 pr-10 py-2.5 md:py-3 bg-[#F5F5F7] focus:bg-white border border-transparent focus:border-gray-200 rounded-full outline-none transition-all text-sm font-medium placeholder-gray-400 placeholder:transition-opacity placeholder:duration-500"
+                className="w-full pl-11 pr-10 py-2.5 md:py-3 bg-[#F5F5F7] focus:bg-white border border-transparent focus:border-gray-200 rounded-full outline-none transition-all text-sm font-medium placeholder-gray-400"
                 value={searchQuery}
                 onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(ITEMS_PER_PAGE); }}
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 p-1">
                   <X className="w-4 h-4" />
                 </button>
               )}
@@ -452,7 +450,7 @@ export default function App() {
             <button onClick={() => setIsCartOpen(true)} className="relative p-2.5 hover:bg-gray-100 rounded-full transition-all">
               <ShoppingCart className="w-5 h-5 text-gray-700" />
               {cart.length > 0 && (
-                <span className="absolute top-1 right-1 bg-blue-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full animate-bounce">
+                <span className="absolute top-1 right-1 bg-blue-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
                   {cart.length}
                 </span>
               )}
@@ -476,8 +474,8 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <main className={`pb-24 transition-all duration-300 ${searchQuery ? 'pt-32 md:pt-40' : 'pt-20 md:pt-28'}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
+        <div className="max-w-7xl mx-auto px-3 md:px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-10">
             {displayBooks.map((book) => (
               <BookCard 
                 key={book.id} 
@@ -512,24 +510,15 @@ export default function App() {
       {/* COMPACT CENTERED FOOTER */}
       <footer className="bg-gray-50 border-t border-gray-100 py-6 mt-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-          {/* Main Identity Row */}
           <div className="flex flex-col md:flex-row items-center gap-1.5 md:gap-4 mb-3">
             <div className="flex items-center gap-2.5">
-              <img 
-                src={getDriveUrl(LOGO_DRIVE_ID, 80)} 
-                alt="Logo" 
-                className="w-6 h-6 object-contain opacity-80" 
-                referrerPolicy="no-referrer" 
-              />
+              <img src={getDriveUrl(LOGO_DRIVE_ID, 80)} alt="Logo" className="w-6 h-6 object-contain opacity-80" referrerPolicy="no-referrer" />
               <span className="text-sm font-bold text-black tracking-tight">Merit Book House</span>
             </div>
             <div className="hidden md:block h-3 w-px bg-gray-200" />
-            <p className="text-[10px] text-gray-500 font-medium">
-              Prem Nagar Puliya, Agra Road, Jaipur
-            </p>
+            <p className="text-[10px] text-gray-500 font-medium">Prem Nagar Puliya, Agra Road, Jaipur</p>
           </div>
 
-          {/* Social & Contact Row */}
           <div className="flex items-center gap-5 mb-4">
             <div className="flex items-center gap-3">
               <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors"><Instagram className="w-3.5 h-3.5" /></a>
@@ -611,7 +600,7 @@ export default function App() {
             </div>
             <div className="md:w-1/2 p-8 md:p-12">
               <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2 block">{selectedBook.exam}</span>
-              <h2 className="text-2xl font-black mb-6 leading-tight">{selectedBook.title}</h2>
+              <h2 className="text-xl md:text-2xl font-black mb-6 leading-tight">{selectedBook.title}</h2>
               <div className="space-y-3 mb-10 text-xs">
                 <div className="flex justify-between border-b pb-2">
                   <span className="text-gray-400">Author</span>
@@ -644,7 +633,7 @@ export default function App() {
       )}
 
       {showScrollTop && (
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-6 right-6 w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow-lg z-40">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-6 right-6 w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full shadow-lg z-40 transform-gpu active:scale-90 transition-transform">
           <ArrowUp className="w-4 h-4 text-gray-400" />
         </button>
       )}
