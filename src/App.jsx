@@ -286,6 +286,7 @@ const BOOKS_DATA = [
  { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },
 
 
+
 ];
 
 const ITEMS_PER_PAGE = 12;
@@ -302,25 +303,23 @@ const SOCIAL_LINKS = {
 const getDriveUrl = (id, width = 600) => `https://lh3.googleusercontent.com/u/0/d/${id}=w${width}`;
 
 const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
-  <div className="group flex flex-row gap-4 md:gap-6 will-change-transform max-w-2xl mx-auto w-full border-b border-gray-100 pb-6 items-start">
-    {/* Image Container - Fixed Width for Horizontal Layout */}
+  <div className="group flex flex-row gap-4 md:gap-6 max-w-2xl mx-auto w-full border-b border-gray-100 pb-6 items-start">
+    {/* Image Container - Removed background and padding to maximize space */}
     <div 
-      className="relative w-28 md:w-36 shrink-0 aspect-[3/4] overflow-hidden rounded-2xl bg-[#F5F5F7] cursor-pointer"
+      className="relative w-24 md:w-32 shrink-0 aspect-[3/4] overflow-hidden rounded-xl cursor-pointer"
       onClick={() => onSelect(book)}
     >
-      <div className="w-full h-full p-2">
-        <img 
-          src={getDriveUrl(book.img, 400)} 
-          alt={book.title} 
-          className="w-full h-full object-cover rounded-xl shadow-sm transform-gpu" 
-          referrerPolicy="no-referrer"
-          loading="lazy"
-        />
-      </div>
+      <img 
+        src={getDriveUrl(book.img, 400)} 
+        alt={book.title} 
+        className="w-full h-full object-cover shadow-sm transform-gpu" 
+        referrerPolicy="no-referrer"
+        loading="lazy"
+      />
     </div>
 
     {/* Details Container - Right Side */}
-    <div className="flex flex-col flex-1 h-full py-1">
+    <div className="flex flex-col flex-1 h-full py-0.5">
       <div className="flex items-center gap-2 mb-1">
         <span className="text-[9px] md:text-[10px] font-black text-blue-600 uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-full">
           {book.exam}
