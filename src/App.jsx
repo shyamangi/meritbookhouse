@@ -16,26 +16,58 @@ import {
 
 // Book data
 const BOOKS_DATA = [
-  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
-  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
-  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyF40-46YrY61lpIgl5fX" },
-  { id: 4, title: "Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1e6kOP0oACl-OY-3reEVsuhRsUpB-fWYU" },
-  { id: 5, title: "Bharat Ka Bhugol", title_hi: "भारत का भूगोल", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 190.00, img: "10WFk_3U_npGQn-wTSSKn5TE4xWnJS9OC" },
-  { id: 6, title: "Mahila Paryavekshak", title_hi: "महिला पर्यवेक्षक", exam: "Supervisor", author: "Gjanand Sir, Anil Sir, J.P. Choudhary Si", publisher: "Udaan", price: 315.00, img: "1aGcst9sppgkysqPg3CnYxMkXnIYt2WID" },
-  { id: 7, title: "Krishi Pravekshak", title_hi: "कृषि पर्यवेक्षक", exam: "Supervisor", author: "Ashu sir,Vijay sir,Newari sir", publisher: "Taiyari Karlo", price: 135.00, img: "1YNw2ozJcLEpAT40k06OGtiMJp-VsD6JB" },
-  { id: 8, title: "Frp 1st Grade Samanya Vigyan Ganit Sankhiki", title_hi: "FRP प्रथम श्रेणी (1st Grade) सामान्य विज्ञान, गणित एवं सांख्यिकी", exam: "1st Grade", author: "Ramawtar Bhadhala, Rajendra Prasad Gora, Pradeep Sihag, Dinesh Bhadhala", publisher: "Smile Study", price: 232.00, img: "1t-Ywil3JkmRZsr4yX_ChFaFQcJ6RS9fu" },
-  { id: 9, title: "LDC Paper 1 and 2 ", title_hi: "एल.डी.सी. (LDC) पेपर-I एवं II", exam: "LDC", author: "Ashu sir,Vijay sir,Newari sir", publisher: "Taiyari Karlo", price: 594.00, img: "1JX0D1C3Ba9T_krcqfmDoi26uRHVs_SRQ" },
-  { id: 10, title: "Frp Rajasthan Current Varshikank", title_hi: "FRP राजस्थान समसामयिकी वार्षिकांक", exam: "All Exams", author: "Santosh Sharma", publisher: "Mumal", price: 81.00, img: "17gbA9TsjVahy1Qdi2PTk-IXTqtLe-HuL" },
-  { id: 11, title: "Frp Rajasthan Current Varshikank 4.0", title_hi: "FRP राजस्थान समसामयिकी वार्षिकांक", exam: "All Exams", author: "Santosh Sharma", publisher: "Mumal", price: 108.00, img: "1S6GdtA9Pk8SqSDL0P4I2x2X8xlTNl3rC" },
-  { id: 12, title: "2nd Grade Gk Paper 1 ", title_hi: "द्वितीय श्रेणी (II Grade) सामान्य ज्ञान, प्रथम प्रश्न पत्र", exam: "2nd Grade", author: "Pawan Bhawariya, Rakesh Bhaskar, H.P. Taler", publisher: "Nath Publication", price: 629.00, img: "1F1noKgGWzt6i0zzQxJKJYKHJHSS_PxPA" },
-  { id: 13, title: "Rajasthan Gk Old Is Gold", title_hi: "राजस्थान सामान्य ज्ञान: ओल्ड इज गोल्ड", exam: "LDC", author: "Pawan Bhawariya, Rakesh Bhaskar, H.P. Taler", publisher: "Nath Publication", price: 585.00, img: "1Rv7oy8igDmzHKluAvqugcKKJzF5C2OI6" },
-  { id: 14, title: "Bhartiya Rajvyavastha", title_hi: "भारतीय राजव्यवस्था", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 285.00, img: "1xxq0s6wkeMQHb1w83QUnjJeVsUuIw0xr" },
-  { id: 15, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 285.00, img: "1l4WJEAh9APiAWPmeaEYo0bFxeSvSjVAb" },
-  { id: 16, title: "Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "11NAMeNQlaAlCeNwzOyjofBU-2m4mmBeE" },
-  { id: 17, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1eCFhd-Kxxrq2cdqdB5c_z5K9MWqkhJXs" },
-  { id: 18, title: "Rajasthan Ka Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1xd6Ddp04HggFvQkbdzhl0QdUarU2OikA" },
-  { id: 19, title: "Adhunik Bharat Ka Itihas", title_hi: "आधुनिक भारत का इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 200.00, img: "1cCI4Op6V4ja3Z4VzvyW4XClbJeeBX8dy" },
-  { id: 20, title: "RAS Rajasthan Kala Avm Sanskriti", title_hi: "आर.ए.एस. (RAS) राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Rajveer Singh Chalkoi", publisher: "Springboard Academy", price: 152.00, img: "1W_FoyXOPOP7qZwj95C0QC00DM0XjU9Ks" },
+
+ { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
+ { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
+ { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
+ { id: 4, title: "Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1e6kOP0oACl-OY-3reEVsuhRsUpB-fWYU" },
+ { id: 5, title: "Bharat Ka Bhugol", title_hi: "भारत का भूगोल", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 190.00, img: "10WFk_3U_npGQn-wTSSKn5TE4xWnJS9OC" },
+ { id: 6, title: "Mahila Paryavekshak", title_hi: "महिला पर्यवेक्षक", exam: "Supervisor", author: "Gjanand Sir, Anil Sir, J.P. Choudhary Si", publisher: "Udaan", price: 315.00, img: "1aGcst9sppgkysqPg3CnYxMkXnIYt2WID" },
+ { id: 7, title: "Krishi Pravekshak", title_hi: "कृषि पर्यवेक्षक", exam: "Supervisor", author: "Ashu sir,Vijay sir,Newari sir", publisher: "Taiyari Karlo", price: 135.00, img: "1YNw2ozJcLEpAT40k06OGtiMJp-VsD6JB" },
+ { id: 8, title: "Frp 1st Grade Samanya Vigyan Ganit Sankhiki", title_hi: "FRP प्रथम श्रेणी (1st Grade) सामान्य विज्ञान, गणित एवं सांख्यिकी", exam: "1st Grade", author: "Ramawtar Bhadhala,Rajendra Prasad Gora,Pradeep Sihag,Dinesh Bhadhala", publisher: "Smile Study", price: 232.00, img: "1t-Ywil3JkmRZsr4yX_ChFaFQcJ6RS9fu" },
+ { id: 9, title: "LDC Paper 1 and 2 ", title_hi: "एल.डी.सी. (LDC) पेपर-I एवं II", exam: "LDC", author: "Ashu sir,Vijay sir,Newari sir", publisher: "Taiyari Karlo", price: 594.00, img: "1JX0D1C3Ba9T_krcqfmDoi26uRHVs_SRQ" },
+ { id: 10, title: "Frp Rajasthan Current Varshikank", title_hi: "FRP राजस्थान समसामयिकी वार्षिकांक", exam: "All Exams", author: "Santosh Sharma", publisher: "Mumal", price: 81.00, img: "17gbA9TsjVahy1Qdi2PTk-IXTqtLe-HuL" },
+ { id: 11, title: "Frp Rajasthan Current Varshikank 4.0", title_hi: "FRP राजस्थान समसामयिकी वार्षिकांक", exam: "All Exams", author: "Santosh Sharma", publisher: "Mumal", price: 108.00, img: "1S6GdtA9Pk8SqSDL0P4I2x2X8xlTNl3rC" },
+ { id: 12, title: "2nd Grade Gk Paper 1 ", title_hi: "द्वितीय श्रेणी (II Grade) सामान्य ज्ञान, प्रथम प्रश्न पत्र", exam: "2nd Grade", author: "Pawan Bhawariya,Rakesh Bhaskar,H.P. TalerK.C. Godara,", publisher: "Nath Publication", price: 629.00, img: "1F1noKgGWzt6i0zzQxJKJYKHJHSS_PxPA" },
+ { id: 13, title: "Rajasthan Gk Old Is Gold", title_hi: "राजस्थान सामान्य ज्ञान: ओल्ड इज गोल्ड", exam: "LDC", author: "Pawan Bhawariya,Rakesh Bhaskar,H.P. TalerK.C. Godara,", publisher: "Nath Publication", price: 585.00, img: "1Rv7oy8igDmzHKluAvqugcKKJzF5C2OI6" },
+ { id: 14, title: "Bhartiya Rajvyavastha", title_hi: "भारतीय राजव्यवस्था", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 285.00, img: "1xxq0s6wkeMQHb1w83QUnjJeVsUuIw0xr" },
+ { id: 15, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 285.00, img: "1l4WJEAh9APiAWPmeaEYo0bFxeSvSjVAb" },
+ { id: 16, title: "Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "11NAMeNQlaAlCeNwzOyjofBU-2m4mmBeE" },
+ { id: 17, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1eCFhd-Kxxrq2cdqdB5c_z5K9MWqkhJXs" },
+ { id: 18, title: "Rajasthan Ka Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1xd6Ddp04HggFvQkbdzhl0QdUarU2OikA" },
+ { id: 19, title: "Adhunik Bharat Ka Itihas", title_hi: "आधुनिक भारत का इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 200.00, img: "1cCI4Op6V4ja3Z4VzvyW4XClbJeeBX8dy" },
+ { id: 20, title: "RAS Rajasthan Kala Avm Sanskriti", title_hi: "आर.ए.एस. (RAS) राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Rajveer Singh Chalkoi", publisher: "Springboard Academy", price: 152.00, img: "1W_FoyXOPOP7qZwj95C0QCQ0DM0XjU9Ks" },
+ { id: 21, title: "RAS Bhartiya Arthvyavstha", title_hi: "आर.ए.एस. (RAS) भारतीय अर्थव्यवस्था", exam: "RAS, Police", author: "Vijay singh Shekhawat", publisher: "Springboard Academy", price: 228.00, img: "1WMwjEY23ZBfFdq6Cn67G4tgHf0gPNDaU" },
+ { id: 22, title: "RAS Rajasthan Ki Rajvyavastha", title_hi: "आर.ए.एस. (RAS) राजस्थान की राजव्यवस्था", exam: "RAS, Police", author: "Dileep Mahecha", publisher: "Springboard Academy", price: 152.00, img: "1BekGc7kaaAPDnW3cGAt7vAJLJD-QNnTr" },
+ { id: 23, title: "RAS Rajasthan Ka Itihas", title_hi: "आर.ए.एस. (RAS) राजस्थान का इतिहास", exam: "RAS, Police", author: "Rajveer Singh Chalkoi", publisher: "Springboard Academy", price: 200.00, img: "16XGlbMZNGpIDPlojFmPLTt37BZIwQ3c9" },
+ { id: 24, title: "RAS Rajasthan Ka Bhugol", title_hi: "आर.ए.एस. (RAS) राजस्थान का भूगोल", exam: "RAS, Police", author: "Sangata mam", publisher: "Springboard Academy", price: 228.00, img: "1Zzn-rkjmh6LEmJfuci_-ds_bBrmS_7ST" },
+ { id: 25, title: "RAS Prachin Bharat Ka Itihas", title_hi: "आर.ए.एस. (RAS) प्राचीन भारत का इतिहास", exam: "RAS, Police", author: "Narendra Ranawat", publisher: "Springboard Academy", price: 105.00, img: "17j-Ud8TfyMxau_WW3u4vClNbZfyDTM5T" },
+ { id: 26, title: "RAS Madhyakalin Bharat Ka Itihas", title_hi: "आर.ए.एस. (RAS) मध्यकालीन भारत का इतिहास", exam: "RAS, Police", author: "Surya sir", publisher: "Springboard Academy", price: 105.00, img: "1CD9_FCShlyRGhTYp5_cvrKfMmZsxCoKT" },
+ { id: 27, title: "CET 10+2 Avm Snatak V-I", title_hi: "सी.ई.टी. (CET) 10+2 (Senior Secondary) एवं स्नातक (Graduate) स्तर, खंड-I (Volume-I)", exam: "CET", author: "Kanti Jain Mahaveer Jain", publisher: "Lakshya", price: 508.00, img: "1ULZczTeZYJFJ972w1cDOqFhB13BEm9nK" },
+ { id: 28, title: "CET 10+2 V-Ii", title_hi: "सी.ई.टी. (CET) 10+2 (सीनियर सेकेंडरी स्तर), खंड-II (Volume-II)", exam: "CET", author: "Kanti Jain Mahaveer Jain", publisher: "Lakshya", price: 460.00, img: "1wSvRmR_DV32MMjbznD93SCi4fIezdpot" },
+ { id: 29, title: "High Court", title_hi: "राजस्थान उच्च न्यायालय", exam: "High Court", author: "Kanti Jain Mahaveer Jain", publisher: "Lakshya", price: 248.00, img: "1N8xo1Zvzuo-koF_BTN0kvu5yuqUcgE_f" },
+ { id: 30, title: "Bharat Ka Bhugol", title_hi: "भारत का भूगोल", exam: "IAS, Police", author: "Majid Husain", publisher: "Tata Macgraw Hill", price: 660.00, img: "1AbcCa86NdT_1HCgQYA27crAzJmP8aDl0" },
+ { id: 31, title: "Bharat Avm Vishv Ka Bhugol", title_hi: "भारत एवं विश्व का भूगोल", exam: "IAS, Police", author: "Pallavi Saxena", publisher: "Tata Macgraw Hill", price: 540.00, img: "1PdUCQbEJ6lQQ_RNiykdMCezx9WXWhzB7" },
+ { id: 32, title: "Bhartiya Kala Sanskrati ", title_hi: "भारतीय कला एवं संस्कृति", exam: "IAS, Police", author: "Nitin Singhania", publisher: "Tata Macgraw Hill", price: 768.00, img: "1R4Oo0QyyXRJntmz8TattWDuhPc-Vxvej" },
+ { id: 33, title: "Bharat Ki Rajvyavastha", title_hi: "भारत की राजव्यवस्था", exam: "IAS, Police", author: "M. Laxmikanth", publisher: "Tata Macgraw Hill", price: 820.00, img: "1zmYAg7FvIAdHEAB8NqyqV1pQDMZZuXik" },
+ { id: 34, title: "Naveen Hindi Vyakran Avm Rachna", title_hi: "नवीन हिंदी व्याकरण एवं रचना", exam: "RAS, Patwari, VDO, CET, 4th Grade", author: "Dr. Sohandhan Charan", publisher: "Pareek", price: 180.00, img: "1QT8uYFOwqvng8kVUpiQ6AUznTjVeYWtO" },
+ { id: 35, title: "Hindi Vyakran (Sumanlata)", title_hi: "हिंदी व्याकरण", exam: "RAS, Patwari, VDO, CET, 4th Grade", author: "Dr. Sumanlata Yadav,Subhash Charan", publisher: "RBD", price: 270.00, img: "1nYaDLzZ-d1gxNf2vL7CO1W4lrA7GP1IJ" },
+ { id: 36, title: "Rajasthan Bhugol Arthvyavastha", title_hi: "राजस्थान भूगोल एवं अर्थव्यवस्था", exam: "RAS, Patwari, VDO, CET, 4th Grade", author: "N.S. Sharma Sir ,Dr. Vandana Josh,Dileep Singh", publisher: "Sikhwal", price: 300.00, img: "1qAwCeWnyDnc_gNOP_yL03DHiv7i0wjO-" },
+ { id: 37, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Patwari, VDO, CET, 4th Grade", author: "N.S. Sharma Sir", publisher: "Sikhwal", price: 300.00, img: "1Xmw_KiLqY_QmphP45xZ8KQ6FDoJSF03j" },
+ { id: 38, title: "Raj. Kala Evem Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Patwari, VDO, CET, 4th Grade", author: "N.S. Sharma Sir", publisher: "Sikhwal", price: 300.00, img: "15Jvs34VguGCyUq8MugxXS3ah6S3DVdyU" },
+ { id: 39, title: "Prayogshala Sahayak Science Model", title_hi: "प्रयोगशाला सहायक (Lab Assistant) - विज्ञान मॉडल पेपर", exam: "Lab Assistant", author: "Ashish Sharma", publisher: "RBD", price: 214.00, img: "1LYENkYUcyMMrH16P6zYXicdcN4H94Ugw" },
+ { id: 40, title: "Frp Prayogshala Sahayak Vigyan", title_hi: "प्रयोगशाला सहायक (Lab Assistant)", exam: "Lab Assistant", author: "Ashish Sharma", publisher: "RBD", price: 470.00, img: "1fXIpyFEfb59jrMYGpNZKR8yIvckTRQPm" },
+ { id: 41, title: "Ssc Gd Constable", title_hi: "एस.एस.सी. जीडी कांस्टेबल", exam: "Police", author: "Khan Sir", publisher: "RBD", price: 280.00, img: "1HuFomJBfZRc6ZNaADjTS2HOJ6ecuEteu" },
+ { id: 42, title: "Frp Raj. Police Gk Vigyan", title_hi: "राजस्थान पुलिस कांस्टेबल", exam: "Police", author: "Subhash Charan ,Ramakant Sharma,Narayan Sharma,U.S. Shekhawat", publisher: "RBD", price: 470.00, img: "1G7ee2c0_EYldY3q8LF2dREeu8p8olkH6" },
+ { id: 43, title: "Rajasthan Ka Itihas Divyastra", title_hi: "राजस्थान इतिहास", exam: "Multiple Exams", author: "Subhash Charan", publisher: "RBD", price: 162.00, img: "1XyvbrzvCgvnl-0iNV4kSbrBhC4cifIzU" },
+ { id: 44, title: "Frp Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "Multiple Exams", author: "Subhash Charan ,Ramakant Sharma", publisher: "RBD", price: 181.00, img: "1nhAexu82IPab92LB5DiJadINLKYhHZqD" },
+ { id: 45, title: "Rajasthan Ka Bhugol Divyastra", title_hi: "राजस्थान का भूगोल ", exam: "Multiple Exams", author: "Subhash Charan , Narayan Sharma", publisher: "RBD", price: 162.00, img: "1fRRGsdSCyjhNAfAWCotAsA_7bknu5YoY" },
+ { id: 46, title: "High Court Guide Rbd", title_hi: "राजस्थान उच्च न्यायालय", exam: "HIGH COURT", author: "Dr. Sumanlata Yadav, Subhash Charan, Narayan Sharma", publisher: "RBD", price: 297.00, img: "1m3tsx3GPk7jfpgvxUoY1J657kZRa4Es0" },
+ { id: 47, title: "2nd Grade SST Itihas", title_hi: "II Grade (द्वितीय श्रेणी शिक्षक) केसामाजिक विज्ञान (SST) विषय के इतिहास", exam: "2nd Grade", author: "Pawan Bhawariya", publisher: "Nath Publication", price: 171.00, img: "1eg6OkASJKqErJoMZibSyHQ6S9G0AQZJH" },
+ { id: 48, title: "1st Grade Shekshik Prabandh", title_hi: "I Grade (School Lecturer) परीक्षा के प्रथम प्रश्न-पत्र (Paper-I) के खंड शैक्षिक प्रबन्ध ", exam: "1st Grade", author: "Pawan Bhawariya", publisher: "Nath Publication", price: 180.00, img: "1VB3VcOCwotYJa7ecY_6DRYSWAZOKZSAB" },
+ { id: 49, title: "2nd Grade Bhugol SST", title_hi: "II Grade (द्वितीय श्रेणी शिक्षक) SST (सामाजिक विज्ञान) विषय के भूगोल", exam: "2nd Grade", author: "K.C .Godhra ,Vinod taler", publisher: "Nath Publication", price: 225.00, img: "1UqljcrHmtbg5jpVdmA4CF5h6vDu6mdJ8" },
+ { id: 50, title: "1st Grade Ganit Sankhiki Mansik Shamta", title_hi: "गणित सांख्यिकी और मानसिक क्षमता खंड के लिए है", exam: "1st Grade", author: "(Navdeep Goyal", publisher: "Nath Publication", price: 126.00, img: "1QEqRfEJ0987a22vzBFaejrJ8Ffw5E0DI" },
+
 ];
 
 const ITEMS_PER_PAGE = 12;
@@ -230,8 +262,30 @@ export default function App() {
       </nav>
 
       {/* MAIN CONTENT GRID */}
-      <main className="pb-24 pt-8 md:pt-12 min-h-[600px]">
+      <main className="pb-24 pt-4 md:pt-8 min-h-[600px]">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
+          
+          {/* SEARCH STATUS INFO */}
+          {searchQuery && (
+            <div className="mb-6 flex items-center justify-between animate-fade-in px-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Found {filteredBooks.length} {filteredBooks.length === 1 ? 'book' : 'books'}
+                </span>
+                <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+                <span className="text-[10px] font-bold text-blue-600/60 uppercase">
+                  Showing {displayBooks.length}
+                </span>
+              </div>
+              <button 
+                onClick={() => setSearchQuery("")}
+                className="text-[10px] font-bold text-gray-400 hover:text-black uppercase tracking-tighter transition-colors"
+              >
+                Clear Search
+              </button>
+            </div>
+          )}
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
             {displayBooks.map((book) => (
               <BookCard 
