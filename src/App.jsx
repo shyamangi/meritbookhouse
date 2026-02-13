@@ -10,14 +10,15 @@ import {
   Phone,
   MapPin,
   Youtube,
-  ArrowUp
+  ArrowUp,
+  ChevronDown
 } from 'lucide-react';
 
-// Updated book data with the provided list of 20 books
+// Book data
 const BOOKS_DATA = [
   { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
   { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
-  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
+  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyF40-46YrY61lpIgl5fX" },
   { id: 4, title: "Rajasthan Kala Sanskriti", title_hi: "राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1e6kOP0oACl-OY-3reEVsuhRsUpB-fWYU" },
   { id: 5, title: "Bharat Ka Bhugol", title_hi: "भारत का भूगोल", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 190.00, img: "10WFk_3U_npGQn-wTSSKn5TE4xWnJS9OC" },
   { id: 6, title: "Mahila Paryavekshak", title_hi: "महिला पर्यवेक्षक", exam: "Supervisor", author: "Gjanand Sir, Anil Sir, J.P. Choudhary Si", publisher: "Udaan", price: 315.00, img: "1aGcst9sppgkysqPg3CnYxMkXnIYt2WID" },
@@ -34,14 +35,14 @@ const BOOKS_DATA = [
   { id: 17, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1eCFhd-Kxxrq2cdqdB5c_z5K9MWqkhJXs" },
   { id: 18, title: "Rajasthan Ka Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 209.00, img: "1xd6Ddp04HggFvQkbdzhl0QdUarU2OikA" },
   { id: 19, title: "Adhunik Bharat Ka Itihas", title_hi: "आधुनिक भारत का इतिहास", exam: "RAS, Police", author: "Vikash Gupta Sir", publisher: "Ceramic Academy ", price: 200.00, img: "1cCI4Op6V4ja3Z4VzvyW4XClbJeeBX8dy" },
-  { id: 20, title: "RAS Rajasthan Kala Avm Sanskriti", title_hi: "आर.ए.एस. (RAS) राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Rajveer Singh Chalkoi", publisher: "Springboard Academy", price: 152.00, img: "1W_FoyXOPOP7qZwj95C0QCQ0DM0XjU9Ks" },
+  { id: 20, title: "RAS Rajasthan Kala Avm Sanskriti", title_hi: "आर.ए.एस. (RAS) राजस्थान कला एवं संस्कृति", exam: "RAS, Police", author: "Rajveer Singh Chalkoi", publisher: "Springboard Academy", price: 152.00, img: "1W_FoyXOPOP7qZwj95C0QC00DM0XjU9Ks" },
 ];
 
-/**
- * Updated Google Drive URL helper using the thumbnail link method.
- */
-const getDriveUrl = (id) => `https://lh3.googleusercontent.com/u/0/d/${id}=w1000`;
+const ITEMS_PER_PAGE = 12;
+const CONTACT_PHONE = "919119113869"; 
+const CONTACT_DISPLAY = "911.911.3869";
 
+const getDriveUrl = (id) => `https://lh3.googleusercontent.com/u/0/d/${id}=w1000`;
 const LOGO_DRIVE_ID = "1c0M70jx1Vl2tXOHjUcd3Dt0ERSokofUO";
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   useEffect(() => {
     let ticking = false;
@@ -66,17 +68,27 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [searchQuery]);
+
   const filteredBooks = useMemo(() => {
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return BOOKS_DATA;
+    
     return BOOKS_DATA.filter(book => 
       book.title.toLowerCase().includes(query) || 
-      book.title_hi.includes(searchQuery) ||
+      book.title_hi.includes(query) ||
       book.author.toLowerCase().includes(query) || 
       book.exam.toLowerCase().includes(query) ||
       book.publisher.toLowerCase().includes(query) ||
-      String(book.id) === searchQuery
+      String(book.id) === query
     );
   }, [searchQuery]);
+
+  const displayBooks = useMemo(() => {
+    return filteredBooks.slice(0, visibleCount);
+  }, [filteredBooks, visibleCount]);
 
   const addToCart = (book) => {
     setCart(prev => {
@@ -102,11 +114,12 @@ export default function App() {
   const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
   const checkoutOnWhatsApp = () => {
-    const phone = "911234567890"; 
-    const items = cart.map(item => `- ${item.title} [Merit ID: ${item.id}] (${item.qty}x)`).join('\n');
+    const items = cart.map(item => `- ${item.title} [ID: ${item.id}] (${item.qty}x)`).join('\n');
     const message = `Hello Merit Book House! I want to order:\n\n${items}\n\nTotal: ₹${cartTotal}`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(message)}`, '_blank');
   };
+
+  const handleLoadMore = () => setVisibleCount(prev => prev + ITEMS_PER_PAGE);
 
   return (
     <div className="min-h-screen bg-white text-[#1d1d1f] selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden antialiased font-inter">
@@ -118,7 +131,6 @@ export default function App() {
             className="flex items-center gap-1.5 cursor-pointer group" 
             onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
           >
-            {/* Logo Image */}
             <div className="w-10 h-10 transition-transform group-hover:scale-105">
               <img 
                 src={getDriveUrl(LOGO_DRIVE_ID)} 
@@ -127,9 +139,7 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <h1 className="text-xl font-medium tracking-tight">
-              Merit Book House
-            </h1>
+            <h1 className="text-xl font-medium tracking-tight">Merit Book House</h1>
           </div>
 
           <div className="flex items-center gap-4">
@@ -154,12 +164,17 @@ export default function App() {
           <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 group-focus-within:text-blue-600 transition-colors" />
           <input 
             type="text"
-            placeholder="Search books, IDs, publishers, or exams..."
+            placeholder="Search 500+ books by title, ID, or exam..."
             className="w-full pl-14 pr-6 py-5 bg-[#F5F5F7] border border-transparent focus:bg-white focus:border-gray-200 rounded-2xl outline-none transition-all font-medium placeholder-gray-400 shadow-sm"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
+        {searchQuery && (
+          <p className="text-center mt-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
+            Found {filteredBooks.length} books
+          </p>
+        )}
       </div>
 
       {/* PRODUCTS */}
@@ -173,32 +188,39 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
-            {filteredBooks.map((book) => (
+            {displayBooks.map((book) => (
               <div key={book.id} className="group flex flex-col">
                 <div 
-                  className="relative aspect-[3/4] mb-6 overflow-hidden rounded-2xl bg-[#F5F5F7] cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                  className="relative aspect-[3/4] mb-6 overflow-hidden rounded-[2rem] bg-[#F5F5F7] cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
                   onClick={() => setSelectedBook(book)}
                 >
-                  <img 
-                    src={getDriveUrl(book.img)} 
-                    alt={book.title} 
-                    className="w-full h-full object-cover p-6 transition-transform duration-700 group-hover:scale-110" 
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "https://placehold.co/400x600/F5F5F7/666666?text=Cover+Unavailable";
-                    }}
-                  />
-                  <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    <span className="text-[10px] font-bold bg-white/90 backdrop-blur px-2.5 py-1 rounded-full uppercase tracking-tight text-[#1d1d1f] shadow-sm">
+                  <div className="w-full h-full p-4 overflow-hidden rounded-[2rem]">
+                    <img 
+                      src={getDriveUrl(book.img)} 
+                      alt={book.title} 
+                      className="w-full h-full object-cover rounded-[1.75rem] transition-transform duration-700 group-hover:scale-110 shadow-sm" 
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://placehold.co/400x600/F5F5F7/666666?text=Cover+Unavailable";
+                      }}
+                    />
+                  </div>
+                  {/* CENTER ALIGNED OVERLAY: Exam Name (17.5% from bottom) */}
+                  <div className="absolute bottom-[17.5%] left-0 right-0 flex justify-center z-10 pointer-events-none">
+                    <span className="text-[9px] font-bold text-gray-800/90 bg-white/40 backdrop-blur-md px-2.5 py-0.5 rounded-full uppercase tracking-tight shadow-sm border border-white/30 w-fit">
                       {book.exam}
                     </span>
-                    <span className="text-[9px] font-medium text-gray-400 bg-white/50 backdrop-blur-sm px-2 py-0.5 rounded border border-gray-200 w-fit">
-                      Merit ID: {book.id}
+                  </div>
+                  {/* BOTTOM LEFT OVERLAY: ID */}
+                  <div className="absolute bottom-6 left-6 z-10 pointer-events-none">
+                    <span className="text-[8px] font-bold text-gray-400/60 bg-black/5 backdrop-blur-[1px] px-1.5 py-0.5 rounded-md border border-gray-300/10 w-fit ml-0.5">
+                      ID: {book.id}
                     </span>
                   </div>
                 </div>
-                <div className="flex flex-col flex-1">
+                <div className="flex flex-col flex-1 px-2">
                   <h3 className="font-bold text-[15px] mb-1 leading-snug cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setSelectedBook(book)}>
                     {book.title_hi || book.title}
                   </h3>
@@ -220,55 +242,82 @@ export default function App() {
             ))}
           </div>
 
-          {filteredBooks.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-gray-400 font-medium italic">No books found matching your search.</p>
+          {filteredBooks.length > visibleCount && (
+            <div className="mt-20 flex flex-col items-center gap-4">
+              <p className="text-xs text-gray-400 font-bold uppercase tracking-[0.2em]">
+                Showing {visibleCount} of {filteredBooks.length} books
+              </p>
+              <button 
+                onClick={handleLoadMore}
+                className="flex items-center gap-3 px-10 py-5 bg-black text-white rounded-full font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/10"
+              >
+                Load More Books
+                <ChevronDown className="w-4 h-4" />
+              </button>
             </div>
           )}
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-100 py-16">
+      <footer className="bg-white border-t border-gray-100 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-20 mb-16">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">मेरिट बुक हाउस</h2>
-              <div className="space-y-2">
-                <p className="text-gray-700 font-bold leading-relaxed">
-                  राजस्थान के युवाओं को सरकारी सेवा तक पहुँचाने के लिए समर्पित।
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-12">
+            <div className="max-w-sm">
+              <h2 className="text-lg font-extrabold mb-2 tracking-tight">मेरिट बुक हाउस</h2>
+              <div className="space-y-3">
+                <p className="text-gray-600 font-semibold leading-relaxed text-xs">
+                  राजस्थान के युवाओं को सरकारी सेवा के गौरव तक पहुँचाने के लिए समर्पित।
                 </p>
-                <p className="text-gray-500 text-sm font-medium">
+                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">
                   बेस्ट-सेलर बुक्स | डेली एग्जाम अपडेट्स | सटीक मार्गदर्शन
-                </p>
-                <p className="text-blue-600 font-bold text-lg pt-2">
-                  आपकी सफलता का साथी
                 </p>
               </div>
             </div>
-            <div className="flex gap-16">
+            <div className="flex flex-wrap gap-12 md:gap-16">
               <div className="space-y-4">
                 <h4 className="font-bold text-gray-300 text-[10px] uppercase tracking-[0.2em]">Contact</h4>
-                <div className="space-y-2 text-sm font-medium">
-                  <p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> +91 123 456 7890</p>
-                  <p className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> Jaipur, Rajasthan</p>
+                <div className="space-y-3 text-xs font-semibold">
+                  <a 
+                    href={`https://wa.me/${CONTACT_PHONE}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-green-600 transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-gray-400" /> 
+                    {CONTACT_DISPLAY}
+                  </a>
+                  <p className="flex items-start gap-2 max-w-[200px]">
+                    <MapPin className="w-3.5 h-3.5 mt-1 shrink-0 text-gray-400" /> 
+                    <span className="leading-relaxed">Prem Nagar Puliya, Agra Road, Jaipur</span>
+                  </p>
                 </div>
               </div>
               <div className="space-y-4">
                 <h4 className="font-bold text-gray-300 text-[10px] uppercase tracking-[0.2em]">Social</h4>
-                <div className="flex gap-4">
-                  <Instagram className="w-5 h-5 cursor-pointer hover:text-blue-600" />
-                  <Facebook className="w-5 h-5 cursor-pointer hover:text-blue-600" />
-                  <Youtube className="w-5 h-5 cursor-pointer hover:text-blue-600" />
+                <div className="flex gap-5">
+                  <a href="https://instagram.com/meritbookhouse" target="_blank" rel="noopener noreferrer">
+                    <Instagram className="w-5 h-5 cursor-pointer text-gray-400 hover:text-pink-600 transition-colors" />
+                  </a>
+                  <a href="https://www.facebook.com/meritbookhouse" target="_blank" rel="noopener noreferrer">
+                    <Facebook className="w-5 h-5 cursor-pointer text-gray-400 hover:text-blue-600 transition-colors" />
+                  </a>
+                  <a href="https://www.youtube.com/@meritbookhouse" target="_blank" rel="noopener noreferrer">
+                    <Youtube className="w-5 h-5 cursor-pointer text-gray-400 hover:text-red-600 transition-colors" />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-          <p className="text-[10px] text-gray-300 font-bold uppercase tracking-widest pt-8 border-t border-gray-50">© 2024 Merit Book House</p>
+          <div className="pt-8 border-t border-gray-50 flex justify-center items-center">
+            <p className="text-[10px] text-gray-300 font-bold uppercase tracking-widest text-center">
+              © 2024 Merit Book House - A unit of Shyamangi Educraft Pvt. Ltd.
+            </p>
+          </div>
         </div>
       </footer>
 
-      {/* MODALS & DRAWERS */}
+      {/* MODALS */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
@@ -283,12 +332,12 @@ export default function App() {
               ) : (
                 cart.map((item) => (
                   <div key={item.id} className="flex gap-6">
-                    <div className="w-20 h-24 bg-gray-50 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
-                      <img src={getDriveUrl(item.img)} className="w-full h-full object-cover p-2" referrerPolicy="no-referrer" />
+                    <div className="w-20 h-24 bg-gray-50 rounded-2xl overflow-hidden shrink-0 flex items-center justify-center p-2">
+                      <img src={getDriveUrl(item.img)} className="w-full h-full object-cover rounded-xl shadow-sm" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-1">
                       <h4 className="font-bold text-sm mb-0.5">{item.title_hi || item.title}</h4>
-                      <p className="text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-tight">Merit ID: {item.id} • {item.publisher}</p>
+                      <p className="text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-tight">ID: {item.id} • {item.publisher}</p>
                       <p className="text-xs text-gray-400 font-medium mb-4">₹{item.price}</p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4 bg-gray-50 px-3 py-1 rounded-full text-xs font-bold">
@@ -318,18 +367,17 @@ export default function App() {
       {selectedBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 md:p-12">
           <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl" onClick={() => setSelectedBook(null)} />
-          <div className="bg-white w-full max-w-4xl rounded-[40px] overflow-hidden relative flex flex-col md:flex-row shadow-2xl animate-scale-in">
+          <div className="bg-white w-full max-w-4xl rounded-[3rem] overflow-hidden relative flex flex-col md:flex-row shadow-2xl animate-scale-in">
             <button onClick={() => setSelectedBook(null)} className="absolute top-8 right-8 p-3 bg-gray-100 rounded-full z-10"><X className="w-5 h-5" /></button>
             <div className="md:w-1/2 bg-gray-50 p-12 flex items-center justify-center">
-              <img src={getDriveUrl(selectedBook.img)} className="max-h-[400px] object-cover rounded-2xl shadow-2xl" referrerPolicy="no-referrer" />
+              <img src={getDriveUrl(selectedBook.img)} className="max-h-[400px] object-cover rounded-[2.5rem] shadow-2xl" referrerPolicy="no-referrer" />
             </div>
             <div className="md:w-1/2 p-12 md:p-16 flex flex-col justify-center">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">{selectedBook.exam} Series</span>
-                <span className="text-[10px] font-medium text-gray-400 border border-gray-200 px-2 py-0.5 rounded">Merit ID: {selectedBook.id}</span>
+                <span className="text-[10px] font-medium text-gray-400 border border-gray-200 px-2 py-0.5 rounded">ID: {selectedBook.id}</span>
               </div>
               <h2 className="text-3xl font-bold tracking-tight mb-2">{selectedBook.title_hi || selectedBook.title}</h2>
-              <h3 className="text-lg text-gray-500 mb-6">{selectedBook.title}</h3>
               <div className="space-y-4 mb-10 text-sm">
                 <div className="flex justify-between border-b border-gray-100 pb-3"><span className="text-gray-400">Author</span><span className="font-bold">{selectedBook.author}</span></div>
                 <div className="flex justify-between border-b border-gray-100 pb-3"><span className="text-gray-400">Publisher</span><span className="font-bold">{selectedBook.publisher}</span></div>
@@ -356,31 +404,10 @@ export default function App() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        
         html { scroll-behavior: smooth; }
         .font-inter { font-family: 'Inter', sans-serif; }
-        
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          text-rendering: optimizeLegibility;
-        }
-
-        nav {
-          transform: translateZ(0);
-          backface-visibility: hidden;
-        }
-
-        @keyframes slide-in {
-          from { transform: translate3d(100%, 0, 0); }
-          to { transform: translate3d(0, 0, 0); }
-        }
-        
-        @keyframes scale-in {
-          from { transform: scale(0.95); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-        
+        @keyframes slide-in { from { transform: translate3d(100%, 0, 0); } to { transform: translate3d(0, 0, 0); } }
+        @keyframes scale-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .animate-slide-in { animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       `}} />
