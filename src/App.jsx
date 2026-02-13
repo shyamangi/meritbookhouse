@@ -17,6 +17,7 @@ import {
 
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
+  
 
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
@@ -282,7 +283,8 @@ const BOOKS_DATA = [
  { id: 262, title: "Medical Dictionary E-E-H", title_hi: " मेडिकल डिक्शनरी  (इंग्लिश - इंग्लिश - हिंदी)", exam: "CENTRAL ALL EXAM", author: "Dr.H.L. Verma, Sr.S.K. Gupta", publisher: "Amar", price: 297.00, img: "1uivRi5j-T8-ur_POyh-Ue5fHcnSEXveb" },
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
- { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },  
+ { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },
+
 
 ];
 
@@ -300,50 +302,58 @@ const SOCIAL_LINKS = {
 const getDriveUrl = (id, width = 600) => `https://lh3.googleusercontent.com/u/0/d/${id}=w${width}`;
 
 const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
-  <div className="group flex flex-col will-change-transform">
+  <div className="group flex flex-row gap-4 md:gap-6 will-change-transform max-w-2xl mx-auto w-full border-b border-gray-100 pb-6 items-start">
+    {/* Image Container - Fixed Width for Horizontal Layout */}
     <div 
-      className="relative aspect-[3/4] mb-3 overflow-hidden rounded-[1.5rem] bg-[#F5F5F7] cursor-pointer transition-all duration-300 transform-gpu"
+      className="relative w-28 md:w-36 shrink-0 aspect-[3/4] overflow-hidden rounded-2xl bg-[#F5F5F7] cursor-pointer"
       onClick={() => onSelect(book)}
     >
-      <div className="w-full h-full p-2.5 md:p-4">
+      <div className="w-full h-full p-2">
         <img 
-          src={getDriveUrl(book.img, 500)} 
+          src={getDriveUrl(book.img, 400)} 
           alt={book.title} 
-          className="w-full h-full object-cover rounded-[1.1rem] transition-transform duration-500 group-hover:scale-105 shadow-sm transform-gpu" 
+          className="w-full h-full object-cover rounded-xl shadow-sm transform-gpu" 
           referrerPolicy="no-referrer"
           loading="lazy"
         />
       </div>
     </div>
-    <div className="flex flex-col flex-1 px-1">
-      <div className="h-[14px] mb-1 overflow-hidden flex items-center">
-        <span className="text-[9px] md:text-[10px] font-extrabold text-blue-600 uppercase tracking-tighter">
+
+    {/* Details Container - Right Side */}
+    <div className="flex flex-col flex-1 h-full py-1">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="text-[9px] md:text-[10px] font-black text-blue-600 uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-full">
           {book.exam}
         </span>
+        <span className="text-[9px] md:text-[10px] font-bold text-gray-300 uppercase tracking-tight">ID: {book.id}</span>
       </div>
-      <div className="h-[40px] md:h-[45px] overflow-hidden mb-1">
-        <h3 className="font-bold text-[13px] md:text-[15px] leading-[1.2] cursor-pointer hover:text-blue-600 transition-colors line-clamp-2" onClick={() => onSelect(book)}>
-          {book.title}
-        </h3>
+      
+      <h3 
+        className="font-bold text-[15px] md:text-[18px] leading-[1.3] mb-1 cursor-pointer hover:text-blue-600 transition-colors line-clamp-2" 
+        onClick={() => onSelect(book)}
+      >
+        {book.title}
+      </h3>
+      
+      <div className="flex flex-col gap-0.5 mb-3">
+        <p className="text-[11px] md:text-[13px] font-medium text-gray-500 line-clamp-1">{book.author}</p>
+        <p className="text-[10px] md:text-[11px] font-bold text-gray-400 uppercase tracking-tight line-clamp-1">{book.publisher}</p>
       </div>
-      <div className="flex flex-col gap-0.5 mb-2 h-[34px] overflow-hidden">
-        <p className="text-[10px] md:text-[11px] font-medium text-gray-400 truncate italic">{book.author}</p>
-        <div className="flex items-center gap-1.5 overflow-hidden">
-          <p className="text-[9px] md:text-[10px] font-bold text-gray-500 truncate uppercase tracking-tight shrink">{book.publisher}</p>
-          <span className="text-[8px] md:text-[9px] font-bold text-gray-300 bg-gray-50 px-1 py-0.5 rounded border border-gray-100 uppercase tracking-tight shrink-0">ID: {book.id}</span>
+
+      <div className="mt-auto flex items-center justify-between">
+        <div className="flex flex-col">
+          <span className="text-[18px] md:text-[20px] font-black tracking-tight leading-none text-black">₹{book.price}</span>
         </div>
-      </div>
-      <div className="mt-auto flex items-center justify-between pb-1">
-        <span className="text-[16px] md:text-[18px] font-extrabold tracking-tight leading-none">₹{book.price}</span>
+        
         <button 
           onClick={(e) => { e.stopPropagation(); onAdd(book); }}
-          className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full transition-all active:scale-90 transform-gpu ${
+          className={`px-4 md:px-6 h-9 md:h-10 flex items-center gap-2 rounded-full font-bold text-[11px] md:text-xs transition-all active:scale-95 transform-gpu ${
             isInCart 
             ? "bg-blue-600 text-white shadow-md" 
-            : "bg-[#F5F5F7] md:hover:bg-black md:hover:text-white"
+            : "bg-black text-white hover:bg-gray-800"
           }`}
         >
-          {isInCart ? <Check className="w-4 h-4" /> : <Plus className="w-3.5 h-3.5" />}
+          {isInCart ? <><Check className="w-3.5 h-3.5" /> Added</> : <><Plus className="w-3.5 h-3.5" /> Add</>}
         </button>
       </div>
     </div>
@@ -439,7 +449,7 @@ export default function App() {
             </button>
           </div>
 
-          {/* Persistent Results Info Row (Inside Fixed Nav) */}
+          {/* Persistent Results Info Row */}
           {searchQuery && (
             <div className="pb-3 px-1 animate-in fade-in slide-in-from-top-1 duration-300">
               <div className="flex items-center gap-2">
@@ -456,8 +466,8 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <main className={`pb-24 transition-all duration-300 ${searchQuery ? 'pt-32 md:pt-40' : 'pt-20 md:pt-28'}`}>
-        <div className="max-w-7xl mx-auto px-3 md:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-10">
+        <div className="max-w-2xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col gap-8 md:gap-10">
             {displayBooks.map((book) => (
               <BookCard 
                 key={book.id} 
@@ -489,7 +499,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* COMPACT CENTERED FOOTER */}
+      {/* FOOTER */}
       <footer className="bg-gray-50 border-t border-gray-100 py-6 mt-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
           <div className="flex flex-col md:flex-row items-center gap-1.5 md:gap-4 mb-3">
