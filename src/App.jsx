@@ -17,7 +17,6 @@ import {
 
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
-  
 
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
@@ -284,9 +283,6 @@ const BOOKS_DATA = [
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
  { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },
-
-
-
 ];
 
 const ITEMS_PER_PAGE = 12;
@@ -302,9 +298,19 @@ const SOCIAL_LINKS = {
 
 const getDriveUrl = (id, width = 600) => `https://lh3.googleusercontent.com/u/0/d/${id}=w${width}`;
 
+// Utility to shuffle array
+const shuffleArray = (array) => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
 const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
   <div className="group flex flex-row gap-4 md:gap-6 max-w-2xl mx-auto w-full border-b border-gray-100 pb-6 items-start">
-    {/* Image Container - Removed background and padding to maximize space */}
+    {/* Image Container */}
     <div 
       className="relative w-24 md:w-32 shrink-0 aspect-[3/4] overflow-hidden rounded-xl cursor-pointer"
       onClick={() => onSelect(book)}
@@ -360,12 +366,18 @@ const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
 ));
 
 export default function App() {
+  const [shuffledData, setShuffledData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  // Initialize shuffled data on mount
+  useEffect(() => {
+    setShuffledData(shuffleArray(BOOKS_DATA));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -375,9 +387,11 @@ export default function App() {
 
   const filteredBooks = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
-    if (!query) return BOOKS_DATA;
+    const sourceData = shuffledData.length > 0 ? shuffledData : BOOKS_DATA;
     
-    return BOOKS_DATA.filter(book => 
+    if (!query) return sourceData;
+    
+    return sourceData.filter(book => 
       book.title.toLowerCase().includes(query) || 
       (book.title_hi && book.title_hi.includes(query)) ||
       book.author.toLowerCase().includes(query) || 
@@ -385,7 +399,7 @@ export default function App() {
       book.publisher.toLowerCase().includes(query) ||
       String(book.id) === query
     );
-  }, [searchQuery]);
+  }, [searchQuery, shuffledData]);
 
   const displayBooks = useMemo(() => filteredBooks.slice(0, visibleCount), [filteredBooks, visibleCount]);
 
