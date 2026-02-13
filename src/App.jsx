@@ -16,7 +16,7 @@ import {
 
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
- 
+  
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
@@ -461,7 +461,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* MAIN CONTENT - Adjusted pt to accommodate the dynamic height of the fixed nav */}
+      {/* MAIN CONTENT */}
       <main className={`pb-24 transition-all duration-300 ${searchQuery ? 'pt-32 md:pt-40' : 'pt-20 md:pt-28'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
@@ -490,32 +490,51 @@ export default function App() {
         </div>
       </main>
 
-      {/* COMPACT FOOTER */}
-      <footer className="bg-gray-50 border-t border-gray-100 py-10 mt-20">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <h2 className="text-base font-normal tracking-tight mb-1">Merit Book House</h2>
-            <p className="text-gray-400 text-[11px] font-medium leading-relaxed">
-              Prem Nagar Puliya, Agra Road, Jaipur
-            </p>
+      {/* FULLY CENTERED FOOTER */}
+      <footer className="bg-gray-50 border-t border-gray-100 py-16 mt-20">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+          {/* Logo & Info Section */}
+          <div className="flex flex-col items-center gap-4 mb-10">
+            <img 
+              src={getDriveUrl(LOGO_DRIVE_ID, 120)} 
+              alt="Logo" 
+              className="w-10 h-10 object-contain" 
+              referrerPolicy="no-referrer" 
+            />
+            <div>
+              <h2 className="text-xl font-bold tracking-tight mb-1 text-black">Merit Book House</h2>
+              <p className="text-gray-400 text-xs font-medium max-w-xs mx-auto">
+                Prem Nagar Puliya, Agra Road, Jaipur
+              </p>
+            </div>
           </div>
           
-          <div className="flex flex-col items-center md:items-end gap-3">
-            <div className="flex gap-4 items-center">
-              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Follow us</span>
-              <div className="flex items-center gap-3">
-                <div className="flex gap-2">
-                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-pink-600"><Instagram className="w-4 h-4" /></a>
-                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-blue-600"><Facebook className="w-4 h-4" /></a>
-                  <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-red-600"><Youtube className="w-4 h-4" /></a>
-                </div>
-                <div className="w-px h-3 bg-gray-200 mx-1 hidden md:block" />
-                <a href={`https://wa.me/${CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-gray-400 hover:text-black transition-colors flex items-center gap-1.5">
-                  <Phone className="w-3 h-3" />
-                  {CONTACT_DISPLAY}
-                </a>
+          {/* Social & Contact Section */}
+          <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">Connect with us</span>
+              <div className="flex items-center gap-6">
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-pink-600 hover:scale-110"><Instagram className="w-4 h-4" /></a>
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-blue-600 hover:scale-110"><Facebook className="w-4 h-4" /></a>
+                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-red-600 hover:scale-110"><Youtube className="w-4 h-4" /></a>
               </div>
             </div>
+
+            <div className="h-px w-20 bg-gray-200" />
+
+            <a href={`https://wa.me/${CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-700 hover:border-black transition-all group">
+              <Phone className="w-3.5 h-3.5 text-blue-600 group-hover:animate-pulse" />
+              {CONTACT_DISPLAY}
+            </a>
+          </div>
+
+          <div className="mt-12 space-y-1">
+            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">
+              &copy; 2026 Merit Book House
+            </p>
+            <p className="text-[9px] text-gray-300 font-medium uppercase tracking-widest">
+              A unit of Shyamangi Educraft Pvt. Ltd. | All Rights Reserved.
+            </p>
           </div>
         </div>
       </footer>
