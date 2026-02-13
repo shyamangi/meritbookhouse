@@ -16,7 +16,7 @@ import {
 
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
-  
+ 
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
@@ -281,19 +281,18 @@ const BOOKS_DATA = [
  { id: 262, title: "Medical Dictionary E-E-H", title_hi: " मेडिकल डिक्शनरी  (इंग्लिश - इंग्लिश - हिंदी)", exam: "CENTRAL ALL EXAM", author: "Dr.H.L. Verma, Sr.S.K. Gupta", publisher: "Amar", price: 297.00, img: "1uivRi5j-T8-ur_POyh-Ue5fHcnSEXveb" },
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
- { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },
-
-
-
-
-
-
-];
+ { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },];
 
 const ITEMS_PER_PAGE = 12;
 const CONTACT_PHONE = "919119113869"; 
 const CONTACT_DISPLAY = "911.911.3869";
 const LOGO_DRIVE_ID = "1c0M70jx1Vl2tXOHjUcd3Dt0ERSokofUO";
+
+const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/meritbookhouse",
+  facebook: "https://www.facebook.com/meritbookhouse",
+  youtube: "https://www.youtube.com/@meritbookhouse"
+};
 
 const getDriveUrl = (id, width = 600) => `https://lh3.googleusercontent.com/u/0/d/${id}=w${width}`;
 
@@ -412,51 +411,59 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#1d1d1f] font-inter antialiased overflow-x-hidden">
       
-      {/* MINIMAL NAV */}
-      <nav className="sticky top-0 bg-white/80 backdrop-blur-xl z-40 border-b border-gray-100/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center gap-4">
-          <div className="shrink-0 cursor-pointer hidden md:block" onClick={() => {setSearchQuery(""); window.scrollTo(0,0);}}>
-            <img src={getDriveUrl(LOGO_DRIVE_ID, 200)} alt="Logo" className="w-9 h-9 object-contain" referrerPolicy="no-referrer" />
+      {/* FIXED NAV BAR */}
+      <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-xl z-50 border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col">
+          {/* Main Nav Row */}
+          <div className="h-16 md:h-20 flex items-center gap-4">
+            <div className="shrink-0 cursor-pointer hidden md:block" onClick={() => {setSearchQuery(""); window.scrollTo(0,0);}}>
+              <img src={getDriveUrl(LOGO_DRIVE_ID, 200)} alt="Logo" className="w-9 h-9 object-contain" referrerPolicy="no-referrer" />
+            </div>
+
+            <div className="flex-1 relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input 
+                type="text"
+                placeholder={searchSuggestions[placeholderIndex]}
+                className="w-full pl-11 pr-10 py-2.5 md:py-3 bg-[#F5F5F7] focus:bg-white border border-transparent focus:border-gray-200 rounded-full outline-none transition-all text-sm font-medium placeholder-gray-400 placeholder:transition-opacity placeholder:duration-500"
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(ITEMS_PER_PAGE); }}
+              />
+              {searchQuery && (
+                <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            <button onClick={() => setIsCartOpen(true)} className="relative p-2.5 hover:bg-gray-100 rounded-full transition-all">
+              <ShoppingCart className="w-5 h-5 text-gray-700" />
+              {cart.length > 0 && (
+                <span className="absolute top-1 right-1 bg-blue-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full animate-bounce">
+                  {cart.length}
+                </span>
+              )}
+            </button>
           </div>
 
-          <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <input 
-              type="text"
-              placeholder={searchSuggestions[placeholderIndex]}
-              className="w-full pl-11 pr-10 py-2.5 md:py-3 bg-[#F5F5F7] focus:bg-white border border-transparent focus:border-gray-200 rounded-full outline-none transition-all text-sm font-medium placeholder-gray-400 placeholder:transition-opacity placeholder:duration-500"
-              value={searchQuery}
-              onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(ITEMS_PER_PAGE); }}
-            />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
-          <button onClick={() => setIsCartOpen(true)} className="relative p-2.5 hover:bg-gray-100 rounded-full transition-all">
-            <ShoppingCart className="w-5 h-5 text-gray-700" />
-            {cart.length > 0 && (
-              <span className="absolute top-1 right-1 bg-blue-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full animate-bounce">
-                {cart.length}
-              </span>
-            )}
-          </button>
+          {/* Persistent Results Info Row (Inside Fixed Nav) */}
+          {searchQuery && (
+            <div className="pb-3 px-1 animate-in fade-in slide-in-from-top-1 duration-300">
+              <div className="flex items-center gap-2">
+                <div className="h-px flex-1 bg-gray-100 md:hidden" />
+                <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full uppercase tracking-widest whitespace-nowrap">
+                  {filteredBooks.length} Results Found
+                </span>
+                <div className="h-px flex-1 bg-gray-100" />
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
-      {/* MAIN CONTENT */}
-      <main className="pb-24 pt-8">
+      {/* MAIN CONTENT - Adjusted pt to accommodate the dynamic height of the fixed nav */}
+      <main className={`pb-24 transition-all duration-300 ${searchQuery ? 'pt-32 md:pt-40' : 'pt-20 md:pt-28'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          {searchQuery && (
-            <div className="mb-6 flex items-center gap-2 px-1">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                Found {filteredBooks.length} Results for "{searchQuery}"
-              </span>
-            </div>
-          )}
-
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
             {displayBooks.map((book) => (
               <BookCard key={book.id} book={book} onSelect={setSelectedBook} onAdd={addToCart} />
@@ -483,32 +490,39 @@ export default function App() {
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-gray-50 border-t border-gray-100 py-16 mt-20">
-        <div className="max-w-7xl mx-auto px-6 text-center md:text-left grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-lg font-black mb-4">मेरिट बुक हाउस</h2>
-            <p className="text-gray-400 text-xs leading-relaxed max-w-xs mx-auto md:mx-0">जयपुर का सबसे विश्वसनीय परीक्षा पुस्तक भंडार।</p>
+      {/* COMPACT FOOTER */}
+      <footer className="bg-gray-50 border-t border-gray-100 py-10 mt-20">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <h2 className="text-base font-normal tracking-tight mb-1">Merit Book House</h2>
+            <p className="text-gray-400 text-[11px] font-medium leading-relaxed">
+              Prem Nagar Puliya, Agra Road, Jaipur
+            </p>
           </div>
-          <div className="flex flex-col md:flex-row gap-8 justify-end text-xs font-bold">
-             <div className="space-y-2">
-                <p className="text-gray-300 uppercase tracking-widest text-[10px]">Support</p>
-                <a href={`https://wa.me/${CONTACT_PHONE}`} className="block">{CONTACT_DISPLAY}</a>
-                <p className="text-gray-400">Jaipur, Rajasthan</p>
-             </div>
-             <div className="space-y-3">
-                <p className="text-gray-300 uppercase tracking-widest text-[10px]">Follow Us</p>
-                <div className="flex justify-center md:justify-start gap-4">
-                  <Instagram className="w-4 h-4" /> <Facebook className="w-4 h-4" /> <Youtube className="w-4 h-4" />
+          
+          <div className="flex flex-col items-center md:items-end gap-3">
+            <div className="flex gap-4 items-center">
+              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Follow us</span>
+              <div className="flex items-center gap-3">
+                <div className="flex gap-2">
+                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-pink-600"><Instagram className="w-4 h-4" /></a>
+                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-blue-600"><Facebook className="w-4 h-4" /></a>
+                  <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-white hover:shadow-sm rounded-full transition-all text-gray-400 hover:text-red-600"><Youtube className="w-4 h-4" /></a>
                 </div>
-             </div>
+                <div className="w-px h-3 bg-gray-200 mx-1 hidden md:block" />
+                <a href={`https://wa.me/${CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-gray-400 hover:text-black transition-colors flex items-center gap-1.5">
+                  <Phone className="w-3 h-3" />
+                  {CONTACT_DISPLAY}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
 
       {/* CART OVERLAY */}
       {isCartOpen && (
-        <div className="fixed inset-0 z-50">
+        <div className="fixed inset-0 z-[60]">
           <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
           <div className="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl flex flex-col animate-slide-in">
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
@@ -555,7 +569,7 @@ export default function App() {
 
       {/* QUICK VIEW */}
       {selectedBook && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl" onClick={() => setSelectedBook(null)} />
           <div className="bg-white w-full max-w-4xl rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row shadow-2xl animate-scale-in border border-gray-100">
             <button onClick={() => setSelectedBook(null)} className="absolute top-6 right-6 p-2 bg-gray-50 rounded-full z-10"><X className="w-5 h-5" /></button>
