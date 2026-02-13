@@ -16,7 +16,7 @@ import {
 
 // Book data - Keep adding rows here from your sheet
 const BOOKS_DATA = [
-  
+
  { id: 1, title: "Rajasthan Ka Bhugol", title_hi: "राजस्थान का भूगोल ", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 228.00, img: "1rQGjNj2r65ohKv9ocewOQzveFvkIplua" },
  { id: 2, title: "Rajasthan Rajvyavastha", title_hi: "राजस्थान राजव्यवस्था", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 171.00, img: "1LzP9tJ6Ul_Z7glgIunMyfSCwaI7d3r_g" },
  { id: 3, title: "Rajasthan Itihas", title_hi: "राजस्थान इतिहास", exam: "RAS, Police", author: "Kapil Choudhary", publisher: "Booster Academy", price: 238.00, img: "1RbPiMySozXViyN3e-46YrY61lpIgl5fX" },
@@ -281,7 +281,10 @@ const BOOKS_DATA = [
  { id: 262, title: "Medical Dictionary E-E-H", title_hi: " मेडिकल डिक्शनरी  (इंग्लिश - इंग्लिश - हिंदी)", exam: "CENTRAL ALL EXAM", author: "Dr.H.L. Verma, Sr.S.K. Gupta", publisher: "Amar", price: 297.00, img: "1uivRi5j-T8-ur_POyh-Ue5fHcnSEXveb" },
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
- { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },];
+ { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" }, 
+
+
+];
 
 const ITEMS_PER_PAGE = 12;
 const CONTACT_PHONE = "919119113869"; 
@@ -490,50 +493,45 @@ export default function App() {
         </div>
       </main>
 
-      {/* FULLY CENTERED FOOTER */}
-      <footer className="bg-gray-50 border-t border-gray-100 py-16 mt-20">
+      {/* COMPACT CENTERED FOOTER */}
+      <footer className="bg-gray-50 border-t border-gray-100 py-8 mt-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-          {/* Logo & Info Section */}
-          <div className="flex flex-col items-center gap-4 mb-10">
-            <img 
-              src={getDriveUrl(LOGO_DRIVE_ID, 120)} 
-              alt="Logo" 
-              className="w-10 h-10 object-contain" 
-              referrerPolicy="no-referrer" 
-            />
-            <div>
-              <h2 className="text-xl font-bold tracking-tight mb-1 text-black">Merit Book House</h2>
-              <p className="text-gray-400 text-xs font-medium max-w-xs mx-auto">
-                Prem Nagar Puliya, Agra Road, Jaipur
-              </p>
+          {/* Main Identity Row */}
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-5">
+            <div className="flex items-center gap-3">
+              <img 
+                src={getDriveUrl(LOGO_DRIVE_ID, 80)} 
+                alt="Logo" 
+                className="w-7 h-7 object-contain opacity-80" 
+                referrerPolicy="no-referrer" 
+              />
+              <span className="text-sm font-bold text-black tracking-tight">Merit Book House</span>
             </div>
+            <div className="hidden md:block h-3 w-px bg-gray-200" />
+            <p className="text-[10px] text-gray-500 font-medium">
+              Prem Nagar Puliya, Agra Road, Jaipur
+            </p>
           </div>
-          
-          {/* Social & Contact Section */}
-          <div className="flex flex-col items-center gap-8">
-            <div className="flex flex-col items-center gap-4">
-              <span className="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">Connect with us</span>
-              <div className="flex items-center gap-6">
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-pink-600 hover:scale-110"><Instagram className="w-4 h-4" /></a>
-                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-blue-600 hover:scale-110"><Facebook className="w-4 h-4" /></a>
-                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="p-2 bg-white shadow-sm border border-gray-100 rounded-full transition-all text-gray-500 hover:text-red-600 hover:scale-110"><Youtube className="w-4 h-4" /></a>
-              </div>
+
+          {/* Social & Contact Row */}
+          <div className="flex items-center gap-5 mb-6">
+            <div className="flex items-center gap-3">
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors"><Instagram className="w-4 h-4" /></a>
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors"><Facebook className="w-4 h-4" /></a>
+              <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors"><Youtube className="w-4 h-4" /></a>
             </div>
-
-            <div className="h-px w-20 bg-gray-200" />
-
-            <a href={`https://wa.me/${CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-2.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-700 hover:border-black transition-all group">
-              <Phone className="w-3.5 h-3.5 text-blue-600 group-hover:animate-pulse" />
+            <div className="h-3 w-px bg-gray-200" />
+            <a href={`https://wa.me/${CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[11px] font-bold text-gray-600 hover:text-black transition-colors">
+              <Phone className="w-3 h-3 text-blue-500" />
               {CONTACT_DISPLAY}
             </a>
           </div>
-
-          <div className="mt-12 space-y-1">
-            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">
-              &copy; 2026 Merit Book House
-            </p>
-            <p className="text-[9px] text-gray-300 font-medium uppercase tracking-widest">
-              A unit of Shyamangi Educraft Pvt. Ltd. | All Rights Reserved.
+          
+          <div className="pt-4 border-t border-gray-100 w-full max-w-md">
+            <p className="text-[9px] text-gray-400 font-medium uppercase tracking-widest leading-loose">
+              A unit of Shyamangi Educraft Pvt. Ltd.
+              <br />
+              © 2026 Merit Book House <span className="mx-1 opacity-30">|</span> All Rights Reserved.
             </p>
           </div>
         </div>
