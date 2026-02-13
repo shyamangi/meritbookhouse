@@ -282,7 +282,7 @@ const BOOKS_DATA = [
  { id: 262, title: "Medical Dictionary E-E-H", title_hi: " मेडिकल डिक्शनरी  (इंग्लिश - इंग्लिश - हिंदी)", exam: "CENTRAL ALL EXAM", author: "Dr.H.L. Verma, Sr.S.K. Gupta", publisher: "Amar", price: 297.00, img: "1uivRi5j-T8-ur_POyh-Ue5fHcnSEXveb" },
  { id: 263, title: "Dict. E/H", title_hi: "डिक्शनरी इंग्लिश / हिंदी", exam: "CENTRAL ALL EXAM", author: "Professor Ramchandra Pathak", publisher: "Bhargava Publication", price: 385.00, img: "1xC4UdXspAJAeGv-vCCZOvHUHeJNS5U8W" },
  { id: 264, title: "Sanskrit Hindi Angreji Shabdkosh", title_hi: "संस्कृत से हिंदी से अंग्रेजी शब्दकोश", exam: "CENTRAL ALL EXAM", author: "Vaman Shivram Apte", publisher: "Amit", price: 297.00, img: "1y0pS9CZMJFaXHNczvdUKJscCf2HYyAj9" },
- { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" }, 
+ { id: 265, title: "Amar Manak Hindi Shabdkosh H-H", title_hi: "अमर मानक हिंदी शब्दकोश (Hindi-Hindi)", exam: "CENTRAL ALL EXAM", author: "Krishnakant Dikshit ,Suryanarayan Upadhyay", publisher: "KAMAL", price: 216.00, img: "1zookcHa7rKn6uRPhHlwme0juJyyJUjjP" },  
 ];
 
 const ITEMS_PER_PAGE = 12;
@@ -315,15 +315,17 @@ const BookCard = memo(({ book, onSelect, onAdd, isInCart }) => (
       </div>
     </div>
     <div className="flex flex-col flex-1 px-1">
-      <div className="mb-1">
+      <div className="h-[14px] mb-1 overflow-hidden">
         <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-tighter">
           {book.exam}
         </span>
       </div>
-      <h3 className="font-bold text-[14px] md:text-[15px] mb-1 leading-snug cursor-pointer hover:text-blue-600 transition-colors" onClick={() => onSelect(book)}>
-        {book.title}
-      </h3>
-      <div className="flex flex-col gap-0.5 mb-3">
+      <div className="h-[42px] md:h-[45px] overflow-hidden mb-1">
+        <h3 className="font-bold text-[14px] md:text-[15px] leading-snug cursor-pointer hover:text-blue-600 transition-colors line-clamp-2" onClick={() => onSelect(book)}>
+          {book.title}
+        </h3>
+      </div>
+      <div className="flex flex-col gap-0.5 mb-3 h-[32px] overflow-hidden">
         <p className="text-[11px] font-medium text-gray-400 truncate italic">{book.author}</p>
         <div className="flex items-center gap-2">
           <p className="text-[10px] font-bold text-gray-500 truncate uppercase tracking-tight">{book.publisher}</p>
